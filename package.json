@@ -1,0 +1,22 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "��R\u0000E\u0000A\u0000D\u0000M\u0000E\u0000.\u0000m\u0000d\u0000",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natalia4554554356/library.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natalia4554554356/library/issues"
+  },
+  "homepage": "https://github.com/natalia4554554356/library#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
