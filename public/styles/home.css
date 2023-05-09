@@ -17,12 +17,12 @@ a {
 }
 
 /* Header styles */
-header {
+.header {
     background-color: #f2f2f2;
     padding: 10px;
 }
 
-nav ul {
+.nav_list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -30,11 +30,11 @@ nav ul {
     justify-content: space-between;
 }
 
-nav li {
+.nav_list_item {
     margin-right: 20px;
 }
 
-nav a {
+.nav_list_item_link {
     font-weight: bold;
     font-size: 1.2rem;
 }
@@ -46,11 +46,11 @@ main {
     margin: 20px 0;
 }
 
-.books {
+.books_container {
     flex: 2;
 }
 
-.card {
+.book_card {
     margin: 10px;
     padding: 10px;
     background-color: #f2f2f2;
@@ -60,30 +60,30 @@ main {
     flex-direction: column;
 }
 
-.card img {
+.book_card_image {
     max-width: 100%;
     height: auto;
     margin-bottom: 10px;
 }
 
-.card h3 {
+.book_card_title {
     margin-bottom: 5px;
 }
 
-.card p {
+.book_card_author {
     margin-bottom: 10px;
 }
 
-.filters {
+.aside {
     flex: 1;
     margin-left: 20px;
 }
 
-.filters h2 {
+.aside_title {
     margin-bottom: 10px;
 }
 
-input[type="text"] {
+.aside_search {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -92,7 +92,7 @@ input[type="text"] {
 }
 
 /* Footer styles */
-footer {
+.footer {
     background-color: #f2f2f2;
     padding: 10px;
     margin-top: 20px;
@@ -101,11 +101,11 @@ footer {
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-    main {
+    .main {
         flex-direction: column;
     }
 
-    .filters {
+    .aside {
         margin-left: 0;
         margin-top: 20px;
     }
