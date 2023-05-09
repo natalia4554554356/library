@@ -15,6 +15,10 @@ app.get('/about', (req, res) => {
     res.sendFile(path.join(initial_path, 'about.html'))
 })
 
+app.get('/editor', (req, res) => {
+    res.sendFile(path.join(initial_path, 'editor.html'))
+})
+
 app.listen('3000', () => {
     console.log('Listnening on 3000')
 });
