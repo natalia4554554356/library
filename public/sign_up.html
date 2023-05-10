@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" type='text/css' href="styles/sign_up.css">
+</head>
+<body>
+<header class="header">
+    <nav class="nav">
+        <ul class="nav_list">
+            <li class="nav_list_item"><a href="/" class="nav_list_item_link">Home</a></li>
+            <li class="nav_list_item"><a href="/sign_in" class="nav_list_item_link">Sign in</a></li>
+            <li class="nav_list_item"><a href="/about" class="nav_list_item_link">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+<form id="auth-form">
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div>
+        <label for="re_password">Repeat password:</label>
+        <input type="password" id="re_password" name="re_password">
+    </div>
+    <button type="submit" id="signup-btn">Sign Up</button>
+</form>
+</body>
+<script src="sign_up.js" type="module"></script>
+</html>
