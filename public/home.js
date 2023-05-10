@@ -20,30 +20,32 @@ function createBookCard(book) {
     const card = document.createElement('div');
     card.classList.add('book_card');
 
-    const title = document.createElement('h3');
-    title.classList.add('book_card_title')
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('book_card_text_container')
 
-    title.textContent = book.title;
+    const title = document.createElement('h1');
+    title.classList.add('book_card_title')
+    title.textContent = book.title.substring(0, 20);
 
     const author = document.createElement('p');
     author.classList.add('book_card_author')
-    author.textContent = `Author(s): ${book.author}`;
+    author.innerHTML = `<b>Author(s):</b>${book.author}`;
 
     const type = document.createElement('p');
     type.classList.add('book_card_type')
-    type.textContent = `Type: ${book.type}`;
+    type.innerHTML = `<b>Type:</b> ${book.type}`;
 
     const pages = document.createElement('p');
     pages.classList.add('book_card_pages')
-    pages.textContent = `Pages: ${book.pages}`;
+    pages.innerHTML = `<b>Pages:</b> ${book.pages}`;
 
     const year = document.createElement('p');
     year.classList.add('book_card_year')
-    year.textContent = `Year of Publication: ${book.year}`;
+    year.innerHTML = `<b>Year of Publication</b>: ${book.year}`;
 
     const isbn = document.createElement('p');
     isbn.classList.add('book_card_isbn')
-    isbn.textContent = `ISBN: ${book.isbn}`;
+    isbn.innerHTML = `<b>ISBN:</b> ${book.isbn}`;
 
     const timeInfo = document.createElement('div');
     timeInfo.classList.add('book_card_time_info')
@@ -52,8 +54,8 @@ function createBookCard(book) {
     const updatedAt = document.createElement('p');
     createdAt.classList.add('book_card_time_info_createdAt');
     updatedAt.classList.add('book_card_time_info_updatedAt');
-    createdAt.textContent = `createdAt: ${book.createdAt}`
-    updatedAt.textContent = `updatedAt: ${book.updatedAt}`
+    createdAt.innerHTML = `<small>Created at: ${book.createdAt}</small>`
+    updatedAt.innerHTML = `<small>Updated at: ${book.updatedAt}</small>`
 
     timeInfo.append(createdAt, updatedAt)
 
@@ -64,13 +66,14 @@ function createBookCard(book) {
     image.alt = book.title;
 
     card.appendChild(image);
-    card.appendChild(title);
-    card.appendChild(author);
-    card.appendChild(type);
-    card.appendChild(pages);
-    card.appendChild(year);
-    card.appendChild(isbn);
-    card.appendChild(timeInfo);
+    textContainer.appendChild(title);
+    textContainer.appendChild(author);
+    textContainer.appendChild(type);
+    textContainer.appendChild(pages);
+    textContainer.appendChild(year);
+    textContainer.appendChild(isbn);
+    textContainer.appendChild(timeInfo);
+    card.appendChild(textContainer)
 
     return card;
 }
