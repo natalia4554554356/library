@@ -45,6 +45,7 @@ form.addEventListener("submit", async (event) => {
         isbn,
         imageUrl,
         createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
     };
     await addDoc(collection(db, "books"), bookData);
 
