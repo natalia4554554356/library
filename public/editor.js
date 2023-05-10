@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -35,6 +35,7 @@ form.addEventListener("submit", async (event) => {
     await uploadBytes(imageRef, imageFile);
 
     const imageUrl = await getDownloadURL(imageRef);
+    const date = (new Date()).toString().split('(')[0];
 
     const bookData = {
         title,
@@ -44,8 +45,8 @@ form.addEventListener("submit", async (event) => {
         year,
         isbn,
         imageUrl,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
+        createdAt: date,
+        updatedAt: date,
     };
     await addDoc(collection(db, "books"), bookData);
 
