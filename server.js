@@ -19,6 +19,10 @@ app.get('/editor', (req, res) => {
     res.sendFile(path.join(initial_path, 'editor.html'))
 })
 
+app.get('/sign_in', (req, res) => {
+    res.sendFile(path.join(initial_path, 'sign_in.html'))
+})
+
 app.listen('3000', () => {
     console.log('Listnening on 3000')
 });
