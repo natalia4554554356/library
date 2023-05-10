@@ -9,6 +9,9 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -142,7 +145,7 @@ main {
 .footer {
     background-color: #f2f2f2;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: auto;
     text-align: center;
 }
 
