@@ -16,8 +16,6 @@ const db = getFirestore(app);
 
 const bookContainer = document.getElementById('books_container');
 
-console.log(bookContainer)
-
 function createBookCard(book) {
     const card = document.createElement('div');
     card.classList.add('book_card');
@@ -47,6 +45,19 @@ function createBookCard(book) {
     isbn.classList.add('book_card_isbn')
     isbn.textContent = `ISBN: ${book.isbn}`;
 
+    const timeInfo = document.createElement('div');
+    timeInfo.classList.add('book_card_time_info')
+
+    const createdAt = document.createElement('p');
+    const updatedAt = document.createElement('p');
+    createdAt.classList.add('book_card_time_info_createdAt');
+    updatedAt.classList.add('book_card_time_info_updatedAt');
+    createdAt.textContent = `createdAt: ${book.createdAt}`
+    updatedAt.textContent = `updatedAt: ${book.updatedAt}`
+
+    timeInfo.append(createdAt, updatedAt)
+
+
     const image = document.createElement('img');
     image.classList.add('book_card_image')
     image.src = book.imageUrl;
@@ -59,6 +70,7 @@ function createBookCard(book) {
     card.appendChild(pages);
     card.appendChild(year);
     card.appendChild(isbn);
+    card.appendChild(timeInfo);
 
     return card;
 }
