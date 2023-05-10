@@ -118,6 +118,10 @@ main {
     margin-bottom: 10px;
 }
 
+.book_card_time_info {
+    height: 10%;
+}
+
 .aside {
     padding-right: 5%;
 }
