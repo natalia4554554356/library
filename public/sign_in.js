@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import {getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCa7D4i0-g9OQvsOHDefAlhcBl0neUZ2sY",
@@ -13,19 +13,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-
-function signUp(email, password) {
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("User registered:", user.email);
-        })
-        .catch((error) => {
-            console.error("Sign up error:", error);
-        });
-}
-
-// User Login
 function logIn(email, password) {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -37,17 +24,6 @@ function logIn(email, password) {
         });
 }
 
-// User Logout
-function logOut() {
-    signOut(auth)
-        .then(() => {
-            console.log("User logged out");
-        })
-        .catch((error) => {
-            console.error("Logout error:", error);
-        });
-}
-
 const form = document.getElementById('auth-form');
 
 form.addEventListener('submit', (e) => {
@@ -56,7 +32,7 @@ form.addEventListener('submit', (e) => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    signUp(email, password);
-    console.log('signed upo')
+    logIn(email, password);
+    console.log('logged in')
 })
 
