@@ -2,15 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { getAuth,onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
-async function fetchBooks() {
-    const querySnapshot = await getDocs(collection(db, 'books'));
 
-    querySnapshot.forEach((doc) => {
-        const book = doc.data();
-        const bookCard = createBookCard(book);
-        bookContainer.appendChild(bookCard);
-    });
-}
 
 const firebaseConfig = {
     apiKey: "AIzaSyCa7D4i0-g9OQvsOHDefAlhcBl0neUZ2sY",
@@ -27,8 +19,16 @@ const db = getFirestore(app);
 
 const auth = getAuth(app);
 
-const bookContainer = document.getElementById('books_container');
 
+async function fetchBooks() {
+    const querySnapshot = await getDocs(collection(db, 'books'));
+
+    querySnapshot.forEach((doc) => {
+        const book = doc.data();
+        const bookCard = createBookCard(book);
+        bookContainer.appendChild(bookCard);
+    });
+}
 
 function createBookCard(book) {
     const card = document.createElement('div');
@@ -92,7 +92,30 @@ function createBookCard(book) {
     return card;
 }
 
+async function fillHeader(user) {
+    const querySnapshot = await getDocs(collection(db, 'nav_items'));
+    const nav_items = {}
+    querySnapshot.forEach(doc => nav_items[`${doc.id}`] = doc.data())
+
+    nav_list.innerHTML = '';
+
+    if (user) {
+        const items = nav_items['home_logged_in'];
+        nav_list.innerHTML += '\n' + items['home'];
+        nav_list.innerHTML += '\n' + items['account'];
+        nav_list.innerHTML += '\n' + items['about_us'];
+    } else {
+        const items = nav_items['home_logged_out'];
+        nav_list.innerHTML += '\n' + items['home'];
+        nav_list.innerHTML += '\n' + items['sign_in'];
+        nav_list.innerHTML += '\n' + items['about_us'];
+    }
+}
+
 onAuthStateChanged(auth, (user) => {
+
+    fillHeader(user);
+
     if (user) {
         fetchBooks();
 
@@ -100,6 +123,10 @@ onAuthStateChanged(auth, (user) => {
         bookContainer.innerHTML = ''
     }
 })
+
+
+const bookContainer = document.getElementById('books_container');
+const nav_list = document.getElementById('nav_list');
 
 const log_out_btn = document.querySelector('.log_out_btn');
 
@@ -112,7 +139,3 @@ log_out_btn.addEventListener('click', () => {
             console.error("Logout error:", error);
         });
 })
-
-
-
-
