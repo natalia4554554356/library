@@ -1,5 +1,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getAuth,onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+
+async function fetchBooks() {
+    const querySnapshot = await getDocs(collection(db, 'books'));
+
+    querySnapshot.forEach((doc) => {
+        const book = doc.data();
+        const bookCard = createBookCard(book);
+        bookContainer.appendChild(bookCard);
+    });
+}
 
 const firebaseConfig = {
     apiKey: "AIzaSyCa7D4i0-g9OQvsOHDefAlhcBl0neUZ2sY",
@@ -14,7 +25,10 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
+const auth = getAuth(app);
+
 const bookContainer = document.getElementById('books_container');
+
 
 function createBookCard(book) {
     const card = document.createElement('div');
@@ -78,14 +92,27 @@ function createBookCard(book) {
     return card;
 }
 
-async function fetchBooks() {
-    const querySnapshot = await getDocs(collection(db, 'books'));
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        fetchBooks();
 
-    querySnapshot.forEach((doc) => {
-        const book = doc.data();
-        const bookCard = createBookCard(book);
-        bookContainer.appendChild(bookCard);
-    });
-}
+    } else {
+        bookContainer.innerHTML = ''
+    }
+})
 
-fetchBooks();
+const log_out_btn = document.querySelector('.log_out_btn');
+
+log_out_btn.addEventListener('click', () => {
+    signOut(auth)
+        .then(() => {
+            console.log("User logged out");
+        })
+        .catch((error) => {
+            console.error("Logout error:", error);
+        });
+})
+
+
+
+
