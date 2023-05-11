@@ -18,9 +18,8 @@ const auth = getAuth(app);
 
 function signUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("User registered:", user.email);
+        .then(() => {
+            location = '/';
         })
         .catch((error) => {
             console.error("Sign up error:", error);

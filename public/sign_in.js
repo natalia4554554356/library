@@ -16,9 +16,8 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 function logIn(email, password) {
     signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("User logged in:", user.email);
+        .then(() => {
+            location = '/';
         })
         .catch((error) => {
             console.error("Login error:", error);
@@ -47,6 +46,5 @@ form.addEventListener('submit', (e) => {
     const password = document.getElementById('password').value;
 
     logIn(email, password);
-    console.log('logged in')
 })
 
