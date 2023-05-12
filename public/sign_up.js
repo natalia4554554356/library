@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import {getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import {getAuth, createUserWithEmailAndPassword, updateProfile} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 import {getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -16,9 +16,13 @@ const db = getFirestore(app);
 
 const auth = getAuth(app);
 
-function signUp(email, password) {
+function signUp(email, password, user_name) {
     createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
+            updateProfile(auth.currentUser, {
+                displayName: user_name,
+            })
+
             showPopup(popup_successful).then(() => {
                 location = '/';
             });
@@ -67,9 +71,10 @@ form.addEventListener('submit', (e) => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const re_password = document.getElementById('re_password').value;
+    const user_name = document.getElementById('user_name').value;
 
     if (password === re_password)
-        signUp(email, password);
+        signUp(email, password, user_name);
     else
         alert('Passwords are not equal')
 })

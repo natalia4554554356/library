@@ -95,7 +95,7 @@ a {
     width: 400px;
 }
 
-.email_container, .password_container, .re_password_container {
+.email_container, .password_container, .re_password_container, .user_name_container {
     margin-bottom: 10px;
 }
 
@@ -106,7 +106,8 @@ label {
 
 .email_input,
 .password_input,
-.re_password_input{
+.re_password_input,
+.user_name_input{
     width: 100%;
     padding: 5px;
 }
