@@ -24,7 +24,7 @@ const curUser = document.querySelector('.current_user');
 onAuthStateChanged(auth, (user) => {
 
     if (user)
-        curUser.textContent = user.email;
+        curUser.textContent = user.displayName;
     else
         curUser.textContent = ''
 
