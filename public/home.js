@@ -19,6 +19,24 @@ const db = getFirestore(app);
 
 const auth = getAuth(app);
 
+const curUser = document.querySelector('.current_user');
+
+onAuthStateChanged(auth, (user) => {
+
+    if (user)
+        curUser.textContent = user.email;
+    else
+        curUser.textContent = ''
+
+    fillHeader(user);
+
+    if (user) {
+        fetchBooks();
+
+    } else {
+        bookContainer.innerHTML = ''
+    }
+})
 
 async function fetchBooks() {
     const querySnapshot = await getDocs(collection(db, 'books'));
@@ -111,19 +129,6 @@ async function fillHeader(user) {
         nav_list.innerHTML += '\n' + items['about_us'];
     }
 }
-
-onAuthStateChanged(auth, (user) => {
-
-    fillHeader(user);
-
-    if (user) {
-        fetchBooks();
-
-    } else {
-        bookContainer.innerHTML = ''
-    }
-})
-
 
 const bookContainer = document.getElementById('books_container');
 const nav_list = document.getElementById('nav_list');
