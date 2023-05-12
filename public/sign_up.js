@@ -19,11 +19,26 @@ const auth = getAuth(app);
 function signUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
-            location = '/';
+            showPopup(popup_successful).then(() => {
+                location = '/';
+            });
         })
-        .catch((error) => {
-            console.error("Sign up error:", error);
+        .catch(() => {
+            showPopup(popup_rejected)
         });
+}
+
+function showPopup(popup) {
+    popup_overlay.classList.remove("hidden");
+    popup.classList.remove("hidden");
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            popup.classList.add("hidden");
+            popup_overlay.classList.add("hidden");
+            resolve();
+        }, 2000);
+    })
+
 }
 
 async function fillHeader() {
@@ -39,6 +54,12 @@ async function fillHeader() {
 const form = document.getElementById('auth-form');
 const nav_list = document.getElementById('nav_list');
 
+const popup_rejected = document.getElementById('rejected-popup');
+const popup_successful = document.getElementById('success-popup');
+const popup_overlay = document.getElementById('popup_overlay');
+
+
+fillHeader();
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -53,4 +74,3 @@ form.addEventListener('submit', (e) => {
         alert('Passwords are not equal')
 })
 
-fillHeader();
