@@ -12,18 +12,36 @@
         </ul>
     </nav>
 </header>
-<form id="auth-form">
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
+<div class="auth_container">
+    <form id="auth-form">
+        <h2 class="sign_in_title">Sign In</h2>
+
+        <div class="email_container">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="email_input">
+        </div>
+        <div class="password_container">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="password_input">
+        </div>
+        <button type="submit" id="sign_in-btn" class="sign_in_btn">Sign In</button>
+    </form>
+    <p class="sign_up_container">Have no account ? <a href="/sign_up" class="signup_btn">Sign up!</a></p>
+</div>
+
+<div class="popup_overlay hidden" id="popup_overlay">
+    <div id="success-popup" class="popup hidden">
+        <i class="fa-regular fa-circle-check"></i>
+        <p>Sign in successful!</p>
     </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
+
+    <div id="rejected-popup" class="popup hidden">
+        <i class="fa-sharp fa-solid fa-circle-exclamation"></i>
+        <p>Sign in rejected. Please check your credentials.</p>
     </div>
-    <button type="submit" id="signup-btn">Sign In</button>
-</form>
-<p>Have no account ? <a href="/sign_up" class="signup_btn">Sign up!</a></p>
+</div>
+
 </body>
 <script src="sign_in.js" type="module"></script>
+<script src="https://kit.fontawesome.com/b4a785e5d8.js" crossorigin="anonymous"></script>
 </html>
