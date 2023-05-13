@@ -162,6 +162,29 @@ main {
     text-align: center;
 }
 
+.controls_container {
+    height: fit-content;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-block: 10px;
+}
+
+.fa-heart {
+    border: 3px solid transparent;
+    border-radius: 5px;
+    color: #76b0e0;
+    padding: 5px;
+    background: white;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+}
+
+.checked {
+    color: red;
+    background: none;
+    border: 3px solid white;
+}
+
 /* Responsive styles */
 @media screen and (max-width: 768px) {
     .main {
