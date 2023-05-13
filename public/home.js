@@ -2,8 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase
 import { getFirestore, collection, getDocs, getDoc, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { getAuth,onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
-
-
 const firebaseConfig = {
     apiKey: "AIzaSyCa7D4i0-g9OQvsOHDefAlhcBl0neUZ2sY",
     authDomain: "e-library-aace8.firebaseapp.com",
@@ -21,9 +19,14 @@ const auth = getAuth(app);
 
 let currentUser;
 
-onAuthStateChanged(auth, (user) => {
-    currentUser = user;
 
+window.onload = () => {
+    onAuthStateChanged(auth, () => {
+        currentUser = auth.currentUser;
+    })
+}
+
+onAuthStateChanged(auth, (user) => {
     fillHeader(user);
 
     if (user) {
