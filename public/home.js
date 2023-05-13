@@ -154,15 +154,3 @@ async function fillHeader(user) {
 
 const bookContainer = document.getElementById('books_container');
 const nav_list = document.getElementById('nav_list');
-
-const log_out_btn = document.querySelector('.log_out_btn');
-
-log_out_btn.addEventListener('click', () => {
-    signOut(auth)
-        .then(() => {
-            console.log("User logged out");
-        })
-        .catch((error) => {
-            console.error("Logout error:", error);
-        });
-})
