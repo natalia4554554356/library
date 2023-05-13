@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, getDoc, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { getAuth,onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 
@@ -37,14 +37,14 @@ onAuthStateChanged(auth, (user) => {
 async function fetchBooks() {
     const querySnapshot = await getDocs(collection(db, 'books'));
 
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach(async (doc) => {
         const book = {...doc.data(), id: doc.id};
-        const bookCard = createBookCard(book);
+        const bookCard = await createBookCard(book);
         bookContainer.appendChild(bookCard);
     });
 }
 
-function createBookCard(book) {
+async function createBookCard(book) {
     const card = document.createElement('div');
     card.classList.add('book_card');
 
@@ -98,9 +98,14 @@ function createBookCard(book) {
 
     const like_button = document.createElement('i');
 
-    like_button.classList.add('fa-sharp');
     like_button.classList.add('fa-solid');
     like_button.classList.add('fa-heart');
+
+    const docSnap = await getDoc(doc(db, `users_liked/${currentUser.uid}/posts/`, `${book.id}`));
+
+    if (docSnap.exists()) {
+        like_button.classList.add('checked');
+    }
 
     like_button.addEventListener('click', (e) => {
         if (e.target.classList.contains('checked')) {
