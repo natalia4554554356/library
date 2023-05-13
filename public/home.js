@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { getAuth,onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 
@@ -19,14 +19,10 @@ const db = getFirestore(app);
 
 const auth = getAuth(app);
 
-const curUser = document.querySelector('.current_user');
+let currentUser;
 
 onAuthStateChanged(auth, (user) => {
-
-    if (user)
-        curUser.textContent = user.displayName;
-    else
-        curUser.textContent = ''
+    currentUser = user;
 
     fillHeader(user);
 
@@ -42,7 +38,7 @@ async function fetchBooks() {
     const querySnapshot = await getDocs(collection(db, 'books'));
 
     querySnapshot.forEach((doc) => {
-        const book = doc.data();
+        const book = {...doc.data(), id: doc.id};
         const bookCard = createBookCard(book);
         bookContainer.appendChild(bookCard);
     });
@@ -97,6 +93,23 @@ function createBookCard(book) {
     image.src = book.imageUrl;
     image.alt = book.title;
 
+    const controls_container = document.createElement('div');
+    controls_container.classList.add('controls_container');
+
+    const like_button = document.createElement('i');
+
+    like_button.classList.add('fa-sharp');
+    like_button.classList.add('fa-solid');
+    like_button.classList.add('fa-heart');
+
+    like_button.addEventListener('click', (e) => {
+        e.target.classList.toggle('checked');
+
+        setDoc(doc(db, `users_liked/${currentUser.uid}/posts/`, `${book.id}`), book);
+
+    })
+
+    controls_container.appendChild(like_button);
     card.appendChild(image);
     textContainer.appendChild(title);
     textContainer.appendChild(author);
@@ -105,7 +118,8 @@ function createBookCard(book) {
     textContainer.appendChild(year);
     textContainer.appendChild(isbn);
     textContainer.appendChild(timeInfo);
-    card.appendChild(textContainer)
+    card.appendChild(textContainer);
+    card.appendChild(controls_container);
 
     return card;
 }
