@@ -186,14 +186,26 @@ main {
     border: 3px solid white;
 }
 
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-    .main {
-        flex-direction: column;
-    }
+.not_authorized_overlay {
+    position: absolute;
+    height: 90%;
+    top: 10%;
+    background: rgba(1, 1, 1, 0.1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .aside {
-        margin-left: 0;
-        margin-top: 20px;
-    }
+.not_authorized_container {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.not_authorized_title {
+    font-size: 50px;
+}
+
+.hidden {
+    display: none;
 }

@@ -28,7 +28,7 @@ onAuthStateChanged(auth, (user) => {
 
     if (user) {
         fetchBooks();
-
+        not_authorized.classList.add('hidden');
     } else {
         bookContainer.innerHTML = ''
     }
@@ -154,3 +154,4 @@ async function fillHeader(user) {
 
 const bookContainer = document.getElementById('books_container');
 const nav_list = document.getElementById('nav_list');
+const not_authorized = document.getElementById('not_authorized_overlay');
