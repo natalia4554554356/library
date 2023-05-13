@@ -27,6 +27,10 @@ app.get('/sign_up', (req, res) => {
     res.sendFile(path.join(initial_path, 'sign_up.html'))
 })
 
+app.get('/account', (req, res) => {
+    res.sendFile(path.join(initial_path, 'account.html'))
+})
+
 app.listen('3000', () => {
     console.log('Listnening on 3000')
 });
