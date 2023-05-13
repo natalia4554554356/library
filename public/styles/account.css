@@ -95,7 +95,6 @@ a {
 
 .nav_list_item:active {
     background-color: #166ea1;
-    color: white;
 }
 
 .nav_list_item_link {
@@ -124,7 +123,7 @@ a {
     transform: translateX(-50%);
 }
 main {
-    margin: 100px 0;
+    margin: 80px 0;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -203,4 +202,26 @@ main {
     color: red;
     background: none;
     border: 3px solid white;
+}
+
+.create_new_post_btn {
+    margin-inline: auto;
+    background: none;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    color: black;
+    cursor: pointer;
+    font-size: 30px;
+    transition: 0.3s;
+    margin-bottom: 15px;
+}
+
+.create_new_post_btn:hover {
+    border: 1px solid black;
+    color: white;
+    background: #5287D3FF;
+}
+
+.create_new_post_btn:active {
+    background-color: #166ea1;
 }
