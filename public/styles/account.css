@@ -40,11 +40,9 @@ a {
     display: flex;
     height: 100%;
     align-items: center;
+    justify-content: space-between;
 }
 
-.nav_list_item:first-child {
-    margin-right: auto;
-}
 
 .nav_list_item {
     margin-inline: 10px;
@@ -80,4 +78,25 @@ a {
 .nav_list_item_link {
     font-weight: bold;
     font-size: 2rem;
+}
+
+.header_title {
+    color: black;
+}
+
+.liked_title {
+    text-align: center;
+    position: relative;
+    font-size: 60px;
+}
+
+.liked_title:before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 80%;
+    top: 100%;
+    background: black;
+    left: 50%;
+    transform: translateX(-50%);
 }

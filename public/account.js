@@ -1,5 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import {getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 import {getFirestore, collection, getDocs} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -15,6 +15,12 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+let currentUser;
+
+onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+})
+
 fillHeader();
 
 async function fillHeader() {
@@ -26,7 +32,7 @@ async function fillHeader() {
 
     const items = nav_items['account'];
     nav_list.innerHTML += '\n' + items['home'];
-    nav_list.innerHTML += '\n' + items['account'];
+    nav_list.innerHTML += '\n' + `<h1 class="header_title">Hello ${currentUser.displayName}!`;
     nav_list.innerHTML += '\n' + items['about_us'];
 }
 
