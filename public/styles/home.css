@@ -164,12 +164,13 @@ main {
 
 .controls_container {
     height: fit-content;
+    margin-block: 10px;
     display: flex;
-    flex-direction: row-reverse;
-    padding-block: 10px;
+    text-align: center;
 }
 
 .fa-heart {
+    width: 100%;
     border: 3px solid transparent;
     border-radius: 5px;
     color: #76b0e0;
