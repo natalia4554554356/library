@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { getAuth,onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 
@@ -103,10 +103,13 @@ function createBookCard(book) {
     like_button.classList.add('fa-heart');
 
     like_button.addEventListener('click', (e) => {
+        if (e.target.classList.contains('checked')) {
+            deleteDoc(doc(db, `users_liked/${currentUser.uid}/posts/`, `${book.id}`));
+        } else {
+            setDoc(doc(db, `users_liked/${currentUser.uid}/posts/`, `${book.id}`), book);
+        }
+
         e.target.classList.toggle('checked');
-
-        setDoc(doc(db, `users_liked/${currentUser.uid}/posts/`, `${book.id}`), book);
-
     })
 
     controls_container.appendChild(like_button);
