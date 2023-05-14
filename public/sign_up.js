@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
 import {getAuth, createUserWithEmailAndPassword, updateProfile} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-import {getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import {getFirestore, collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCa7D4i0-g9OQvsOHDefAlhcBl0neUZ2sY",
@@ -23,9 +23,12 @@ function signUp(email, password, user_name) {
                 displayName: user_name,
             })
 
+            setDoc(doc(db, 'users', auth.currentUser.uid), {});
+
             showPopup(popup_successful).then(() => {
                 location = '/';
-            });
+            })
+
         })
         .catch(() => {
             showPopup(popup_rejected)
