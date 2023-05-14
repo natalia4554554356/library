@@ -14,25 +14,56 @@
     </nav>
 </header>
 
-<div class="not_authorized_overlay" id="not_authorized_overlay">
-    <div class="not_authorized_container">
-        <h1 class="not_authorized_title">Looks like you have to sign in !</h1>
-    </div>
-</div>
-
 <main class="main">
     <section class="books_container" id="books_container">
 
     </section>
     <aside class="aside">
-        <h2 class="aside_title">Filters</h2>
-        <input type="text" placeholder="Search..." class="aside_search">
+        <form class="filters_form" id="filters_form">
+            <h2 class="aside_title">Filters</h2>
+            <div class="filter_input_container">
+                <label for="free_filter_input" >Search</label>
+                <input id='free_filter_input' name="free_filter" type="text" placeholder="Search..." class="filter_input free_filter_input">
+            </div>
+            <div class="filter_input_container">
+                <label for="title_filter_input">Title</label>
+                <input name='title_filter' id='title_filter_input' type="text" placeholder="Title..." class="filter_input title_filter_input">
+                <div class="radio_button_filter_container">
+                    <input type="radio" id="title_asc_order_input" class="title_order_input" name="title_order_input" value="asc">
+                    <label for="title_asc_order_input">Asc</label>
+                </div>
+
+                <div class="radio_button_filter_container">
+                    <input type="radio" id="title_desc_order_input" class="title_order_input" name="title_order_input" value="desc">
+                    <label for="title_desc_order_input">Desc</label>
+                </div>
+            </div>
+            <div class="filter_input_container">
+                <label for="author_filter_input">Author</label>
+                <input name='author_filter' id='author_filter_input' type="text" placeholder="Author..." class="filter_input author_filter_input">
+                <div class="radio_button_filter_container">
+                    <input type="radio" id="author_asc_order_input" class="author_order_input" name="author_order_input" value="asc">
+                    <label for="author_asc_order_input">Asc</label>
+                </div>
+
+                <div class="radio_button_filter_container">
+                    <input type="radio" id="author_desc_order_input" class="author_order_input" name="author_order_input" value="desc">
+                    <label for="author_desc_order_input">Desc</label>
+                </div>
+            </div>
+            <button type="submit" class="filter_form_submit_btn">Use filters</button>
+        </form>
     </aside>
 </main>
 <footer class="footer">
     <p>© 2023 Electronic Library. All rights reserved.</p>
 </footer>
 
+<div class="not_authorized_overlay" id="not_authorized_overlay">
+    <div class="not_authorized_container">
+        <h1 class="not_authorized_title">Looks like you have to sign in !</h1>
+    </div>
+</div>
 <script src="https://kit.fontawesome.com/b4a785e5d8.js" crossorigin="anonymous"></script>
 <script src="home.js" type="module"></script>
 </body>
