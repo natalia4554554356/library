@@ -1,6 +1,16 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs, getDoc, setDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
-import { getAuth,onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDoc,
+    getDocs,
+    getFirestore,
+    setDoc,
+    query,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCa7D4i0-g9OQvsOHDefAlhcBl0neUZ2sY",
@@ -30,21 +40,100 @@ onAuthStateChanged(auth, (user) => {
     fillHeader(user);
 
     if (user) {
-        fetchBooks();
+        fetchBooks(null);
         not_authorized.classList.add('hidden');
     } else {
         bookContainer.innerHTML = ''
     }
 })
 
-async function fetchBooks() {
-    const querySnapshot = await getDocs(collection(db, 'books'));
+function filterBook(book, filterOptions) {
 
-    querySnapshot.forEach(async (doc) => {
-        const book = {...doc.data(), id: doc.id};
-        const bookCard = await createBookCard(book);
-        bookContainer.appendChild(bookCard);
-    });
+    if (filterOptions === null) {
+        return true;
+    }
+
+    const {free_filter, title_filter, author_filter} = filterOptions;
+    const {title, author, type, pages, year, isbn} = book;
+
+    return [title.toLowerCase().includes(free_filter),
+        author.toLowerCase().includes(free_filter),
+        type.toLowerCase().includes(free_filter),
+        pages.toString().toLowerCase().includes(free_filter),
+        year.toString().toLowerCase().includes(free_filter),
+        isbn.toLowerCase().includes(free_filter),
+        title.toLowerCase().includes(title_filter),
+        author.toLowerCase().includes(author_filter),
+    ].some(item => item === true)
+}
+
+async function fetchBooks(filterOptions) {
+
+    if (filterOptions === null) {
+        const querySnapshot = await getDocs(collection(db, 'books'));
+        querySnapshot.forEach((doc) => {
+            const book = {...doc.data(), id: doc.id};
+
+            createBookCard(book).then(bookCard => {
+                bookContainer.appendChild(bookCard)
+            });
+        });
+        return;
+    }
+
+    const title_order = filterOptions['title_order'];
+    const author_order = filterOptions['author_order'];
+
+    bookContainer.innerHTML = '';
+    if (title_order !== '' && author_order !== '') {
+        const q = query(collection(db, 'books'), orderBy('title', title_order), orderBy('author', author_order));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            const book = {...doc.data(), id: doc.id};
+
+            if (filterBook(book, filterOptions)) {
+                createBookCard(book).then(bookCard => {
+                    bookContainer.appendChild(bookCard)
+                });
+            }
+        });
+    } else if (title_order !== '') {
+        const q = query(collection(db, 'books'), orderBy('title', title_order));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            const book = {...doc.data(), id: doc.id};
+
+            if (filterBook(book, filterOptions)) {
+                createBookCard(book).then(bookCard => {
+                    bookContainer.appendChild(bookCard)
+                });
+            }
+        });
+    }
+    else if (author_order !== '') {
+        const q = query(collection(db, 'books'), orderBy('author', author_order));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            const book = {...doc.data(), id: doc.id};
+
+            if (filterBook(book, filterOptions)) {
+                createBookCard(book).then(bookCard => {
+                    bookContainer.appendChild(bookCard)
+                });
+            }
+        });
+    } else {
+        const querySnapshot = await getDocs(collection(db, 'books'));
+        querySnapshot.forEach((doc) => {
+            const book = {...doc.data(), id: doc.id};
+
+            if (filterBook(book, filterOptions)) {
+                createBookCard(book).then(bookCard => {
+                    bookContainer.appendChild(bookCard)
+                });
+            }
+        });
+    }
 }
 
 async function createBookCard(book) {
@@ -158,3 +247,36 @@ async function fillHeader(user) {
 const bookContainer = document.getElementById('books_container');
 const nav_list = document.getElementById('nav_list');
 const not_authorized = document.getElementById('not_authorized_overlay');
+const filters_form = document.getElementById('filters_form');
+
+filters_form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const free_filter_value = document.getElementById('free_filter_input').value.toLowerCase().trim();
+    const title_filter_value = document.getElementById('title_filter_input').value.toLowerCase().trim();
+    const author_filter_value = document.getElementById('author_filter_input').value.toLowerCase().trim();
+
+    const filters = {
+        free_filter: free_filter_value === '' ? null : free_filter_value,
+        title_filter: title_filter_value === '' ? null : title_filter_value,
+        author_filter: author_filter_value === '' ? null : author_filter_value,
+    }
+
+    try {
+        filters['author_order'] = Array.from(document.querySelectorAll('.author_order_input')).find(radio => radio.checked === true).value;
+    } catch {
+        filters['author_order'] = '';
+    }
+
+    try {
+        filters['title_order'] = Array.from(document.querySelectorAll('.title_order_input')).find(radio => radio.checked === true).value;
+    } catch {
+        filters['title_order'] = '';
+    }
+
+    if (Object.values(filters).every(item => item === ''))
+        fetchBooks(null);
+
+
+    fetchBooks(filters);
+
+})
