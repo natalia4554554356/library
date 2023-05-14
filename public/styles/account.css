@@ -204,6 +204,7 @@ main {
 
 .book_card_time_info {
     width: 100%;
+    margin-top: 5px;
     border-top: 1px solid gray;
 }
 
@@ -251,4 +252,54 @@ main {
 
 .create_new_post_btn:active {
     background-color: #166ea1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.edit_input {
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.controls_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit_button {
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    display: none;
+}
+
+.edit_submit_button {
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: green;
+    display: none;
+}
+
+.delete_post_button {
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #980404;
+    display: none;
+}
+
+.book_card_title_value {
+    margin-bottom: 10px;
+    margin-inline: auto;
+    font-size: 100%;
+    word-wrap: break-word;
+    word-break: break-word;
 }
