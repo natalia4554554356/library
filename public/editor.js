@@ -50,12 +50,12 @@ form.addEventListener("submit", async (event) => {
     const imageUrl = await getDownloadURL(imageRef);
     const date = (new Date()).toString().split('(')[0];
     const bookData = {
-        title,
-        author,
-        type,
-        pages,
-        year,
-        isbn,
+        title: title.trim(),
+        author: author.trim(),
+        type: type.trim(),
+        pages: pages.trim(),
+        year: year.trim(),
+        isbn: isbn.trim(),
         imageUrl,
         createdAt: date,
         updatedAt: date,
