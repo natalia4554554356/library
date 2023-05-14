@@ -248,7 +248,7 @@ const bookContainer = document.getElementById('books_container');
 const nav_list = document.getElementById('nav_list');
 const not_authorized = document.getElementById('not_authorized_overlay');
 const filters_form = document.getElementById('filters_form');
-
+const filters_reset_btn = document.getElementById('filters_form_reset_button');
 filters_form.addEventListener('submit', (e) => {
     e.preventDefault();
     const free_filter_value = document.getElementById('free_filter_input').value.toLowerCase().trim();
@@ -278,5 +278,9 @@ filters_form.addEventListener('submit', (e) => {
 
 
     fetchBooks(filters);
+})
 
+filters_reset_btn.addEventListener('click', () => {
+    filters_form.reset();
+    fetchBooks(null);
 })
