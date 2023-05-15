@@ -148,12 +148,13 @@ async function createLikedBookCard(book) {
 async function fetchCreatedBooks() {
     const querySnapshot = await getDocs(collection(db, `books`));
 
-    querySnapshot.forEach(async (doc) => {
+    querySnapshot.forEach((doc) => {
         const book = {...doc.data(), id: doc.id};
 
         if (book.userID === currentUser.uid) {
-            const bookCard = await createCreatedBookCard(book);
-            createdBookContainer.appendChild(bookCard);
+            createCreatedBookCard(book).then(bookCard => {
+                createdBookContainer.appendChild(bookCard);
+            });
         }
     });
 }
