@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign up</title>
-    <link rel="stylesheet" type='text/css' href="styles/sign_up.css">
+    <title>Sign in</title>
+    <link rel="stylesheet" type='text/css' href="../styles/sign_in.css">
 </head>
 <body>
 <header class="header">
@@ -14,12 +14,8 @@
 </header>
 <div class="auth_container">
     <form id="auth-form">
-        <h2 class="sign_up_title">Sign Up</h2>
+        <h2 class="sign_in_title">Sign In</h2>
 
-        <div class="user_name_container">
-            <label for="user_name">User name:</label>
-            <input type="text" id="user_name" name="user_name" class="user_name_input">
-        </div>
         <div class="email_container">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" class="email_input">
@@ -28,26 +24,24 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" class="password_input">
         </div>
-        <div class="re_password_container">
-            <label for="re_password">Repeat password:</label>
-            <input type="password" id="re_password" name="re_password" class="re_password_input">
-        </div>
-        <button type="submit" id="sign_up-btn" class="sign_up_btn">Sign Up</button>
+        <button type="submit" id="sign_in-btn" class="sign_in_btn">Sign In</button>
     </form>
+    <p class="sign_up_container">Have no account ? <a href="/sign_up" class="sign_up_btn">Sign up!</a></p>
 </div>
 
 <div class="popup_overlay hidden" id="popup_overlay">
     <div id="success-popup" class="popup hidden">
         <i class="fa-regular fa-circle-check"></i>
-        <p>Sign up successful!</p>
+        <p>Sign in successful!</p>
     </div>
 
     <div id="rejected-popup" class="popup hidden">
         <i class="fa-sharp fa-solid fa-circle-exclamation"></i>
-        <p>Sign up rejected. Please check your credentials.</p>
+        <p>Sign in rejected. Please check your credentials.</p>
     </div>
 </div>
+
 </body>
-<script src="scripts/sign_up.js" type="module"></script>
+<script src="../scripts/sign_in.js" type="module"></script>
 <script src="https://kit.fontawesome.com/b4a785e5d8.js" crossorigin="anonymous"></script>
 </html>
