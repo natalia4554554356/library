@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+}
+
+body {
+    font-size: 20px;
+    line-height: 1.5;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Header styles */
+.header {
+    font-family: sans-serif;
+    font-size: 24px;
+    padding: 10px 20px;
+    height: 10%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.log_out_button {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: black;
+    cursor: pointer;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 10px;
+    font-size: 30px;
+    border: 1px solid black;
+    border-top: none;
+    transition: 0.3s ease-in;
+    box-shadow: 0 2px 4px gray;
+    background: none;
+}
+
+.log_out_button:hover {
+    background: #a90914;
+    color: white;
+    box-shadow: 0 2px 4px #670c0c;
+}
+
+.nav {
+    height: 100%;
+}
+
+.nav_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.nav_list_item {
+    margin-inline: 10px;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+.nav_list_item:hover {
+    border: 1px solid black;
+    background-color: #5287d3;
+}
+
+.nav_list_item_link {
+    transition: 0.3s color;
+}
+
+.nav_list_item:hover .nav_list_item_link {
+    color: white;
+}
+
+.nav_list_item:active {
+    background-color: #166ea1;
+}
+
+.nav_list_item_link {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.about_us_container {
+    width: 70%;
+    word-break: break-word;
+    word-wrap: break-word;
+    text-wrap: normal;
+    margin-inline: auto;
+    background: #f1f0ef;
+    padding: 5px 20px;
+    margin-block: 20px;
+    outline: 5px dashed black;
+}
+
+ul {
+    list-style: none;
+}
+
+.info {
+    margin-block: 10px;
+}
